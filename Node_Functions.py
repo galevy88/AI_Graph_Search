@@ -12,7 +12,7 @@ def get_lat_lon(state_index):
     obj = graph.junctions()[state_index]
     return obj.lat, obj.lon
 
-def generate_payload_for_node(state, father_state, path):
+def generate_payload_for_node(state, father_state, path, f):
     new_node_state = state
     new_node_path = []
     if path != None:
@@ -21,6 +21,6 @@ def generate_payload_for_node(state, father_state, path):
     new_node_path.append(father_state)
     child_lat, child_lon = get_lat_lon(new_node_state)
     curent_node_lat, current_node_lon = get_lat_lon(father_state)
-    new_node_path_cost = compute_distance(child_lat, child_lon, curent_node_lat, current_node_lon)
+    new_node_path_cost = f(child_lat, child_lon, curent_node_lat, current_node_lon)
     print(f"New_node_state: {new_node_state} New_node_path: {new_node_path} new_node_path_cost: {new_node_path_cost}")
     return new_node_state, new_node_path, new_node_path_cost

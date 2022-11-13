@@ -7,7 +7,7 @@ from Node import Node
 
 def best_first_graph_search(start, end, f):
     frontier = pQueue.pQueue()
-    start_node = Node(start, [], 0)
+    start_node = Node(start, [], 0, f)
     frontier.append_node(start_node)
     close_list = set()
     while frontier.isNotEmpty():
@@ -25,6 +25,6 @@ def best_first_graph_search(start, end, f):
     return None
 
 
-def uniform_cost_search(start, end):
-   return best_first_graph_search(start, end, compute_distance)
+def uniform_cost_search(start, end, f):
+   return best_first_graph_search(start, end, f)
 
