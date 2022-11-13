@@ -15,8 +15,7 @@ class ProblemCreator:
 
     def convert_problem_list_to_csv(self):
         df = pd.DataFrame.from_dict(self.problems_list)
-        # print(df)
-        df.to_csv('problems.csv', index = False, header=False)
+        df.to_csv('problems.csv', index = False, header=True)
 
 
     def create_one_problem(self):
@@ -32,7 +31,6 @@ class ProblemCreator:
             else:
                 print("Error was detected, I'm trying again")
                 return self.create_one_problem()
-        # print(list)
         return list[0], list[-1]
 
 
@@ -41,10 +39,9 @@ class ProblemCreator:
             start, goal = self.create_one_problem()
             problem = { "start" : start, "goal" : goal}
             self.problems_list.append(problem)
-        # print(self.problems_list)
         self.convert_problem_list_to_csv()
 
-
+        
 
 creator  = ProblemCreator()
 creator.create_all_problems()
