@@ -5,9 +5,9 @@ from ways.tools import compute_distance
 from Node import Node
 
 
-def best_first_graph_search(start, end, f):
+def best_first_graph_search(start, end):
     frontier = pQueue.pQueue()
-    start_node = Node(start, [], 0, f)
+    start_node = Node(start, [], 0)
     frontier.append_node(start_node)
     close_list = set()
     while frontier.isNotEmpty():
@@ -25,6 +25,6 @@ def best_first_graph_search(start, end, f):
     return None
 
 
-def uniform_cost_search(start, end, f):
-   return best_first_graph_search(start, end, f)
+def uniform_cost_search(start, end):
+   return best_first_graph_search(start, end)
 

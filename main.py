@@ -8,7 +8,6 @@ We just parse input and call methods from other modules.
 #simply import your modules and call the appropriate functions
 
 from ucs import uniform_cost_search
-from ways.tools import compute_distance
 
 def huristic_function(lat1, lon1, lat2, lon2):
 
@@ -16,8 +15,14 @@ def huristic_function(lat1, lon1, lat2, lon2):
 
 
 def find_ucs_rout(source, target):
-    uniform_cost_search(source, target, compute_distance)
+    uniform_cost_search(source, target)
 
+def batch_find_ucs_rout(source, target):
+    node_payload = uniform_cost_search(source, target)
+    node_state = node_payload.state
+    node_path = node_payload.path
+    node_path.append(node_state)
+    return source, target, node_path
 
 def find_astar_route(source, target):
     'call function to find path, and return list of indices'
