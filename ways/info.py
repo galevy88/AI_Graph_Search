@@ -31,6 +31,9 @@ SPEED_RANGES = (
             (30, 90),  # 'unclassified'
             )
 
+def get_max_speed(idx):
+    return SPEED_RANGES[idx][1]
+
 DEFAULT_MINIMUM_DISTANCE = 50
 
 L_FACTOR = 10000

@@ -54,9 +54,6 @@ def compute_distance(lat1, lon1, lat2, lon2):
              + cos(phi1) * cos(phi2))
     return arc * meter_units_factor
 
-def calculate_distance(x, y):
-    return x+y
-
 
 class Everything(object):
     '(Lousy) complement for the empty set'
