@@ -1,13 +1,10 @@
 import pQueue
-from ways.graph import Roads
-from ways.graph import load_map_from_csv
-from ways.tools import compute_distance
 from Node import Node
 
 
-def best_first_graph_search(start, end, f):
+def best_first_graph_search(start, end, f, isAstar):
     frontier = pQueue.pQueue()
-    start_node = Node(start, [], 0)
+    start_node = Node(start, [], 0, isAstar, end)
     frontier.append_node(start_node)
     close_list = set()
     while frontier.isNotEmpty():

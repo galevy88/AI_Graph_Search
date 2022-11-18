@@ -8,29 +8,32 @@ We just parse input and call methods from other modules.
 #simply import your modules and call the appropriate functions
 
 from BFGS import best_first_graph_search
+from ways.tools import compute_distance
 
-def distance_function(x, y):
-    return (x+y) / 1000
+def cost_function(x, y, speed):
+    return ((x+y) / 1000) / speed
 
-def huristic_function(lat1, lon1, lat2, lon2):
+def huristic_function(lat1, lon1, lat2, lon2, max_speed):
+    return compute_distance(lat1, lon1, lat2, lon2) / max_speed
 
-    raise NotImplementedError
-
+def Astar_cost_function(x, y, lat1, lon1, lat2, lon2, speed, max_speed):
+    return cost_function(x,y, speed) + huristic_function(lat1, lon1, lat2, lon2, max_speed)
 
 def find_ucs_rout(source, target):
-    best_first_graph_search(source, target, distance_function)
-
-def batch_find_ucs_rout(source, target):
-    node_payload = best_first_graph_search(source, target, distance_function)
+    node_payload = best_first_graph_search(source, target, cost_function, isAstar = False)
     node_state = node_payload.state
     node_path = node_payload.path
     node_path_cost = node_payload.path_cost
     node_path.append(node_state)
-    
     return source, target, node_path, node_path_cost
 
 def find_astar_route(source, target):
-    best_first_graph_search(source, target, distance_function)
+    node_payload = best_first_graph_search(source, target, Astar_cost_function, isAstar = True)
+    node_state = node_payload.state
+    node_path = node_payload.path
+    node_path_cost = node_payload.path_cost
+    node_path.append(node_state)
+    return source, target, node_path, node_path_cost
 
 
 def find_idastar_route(source, target):
@@ -54,6 +57,9 @@ if __name__ == '__main__':
     # from sys import argv
     # dispatch(argv)
     print("Got you!")
-    source = 606320
-    target = 5303
-    find_ucs_rout(source, target)
+    source = 17869
+    target = 17867
+    x = find_ucs_rout(source, target)
+    y = find_astar_route(source, target)
+    print(x)
+    print(y)
