@@ -13,14 +13,14 @@ from ways.tools import compute_distance
 def cost_function(x, y, speed):
     return ((x+y) / 1000) / speed
 
-def huristic_function(lat1, lon1, lat2, lon2, max_speed):
-    return compute_distance(lat1, lon1, lat2, lon2) / max_speed
+def huristic_function(lat1, lon1, lat2, lon2):
+    return compute_distance(lat1, lon1, lat2, lon2) / 110
 
-def Astar_cost_function(x, y, lat1, lon1, lat2, lon2, speed, max_speed):
-    return cost_function(x,y, speed) + huristic_function(lat1, lon1, lat2, lon2, max_speed)
+# def Astar_cost_function(x, y, lat1, lon1, lat2, lon2, speed, max_speed):
+#     return cost_function(x,y, speed) + huristic_function(lat1, lon1, lat2, lon2, max_speed)
 
 def find_ucs_rout(source, target):
-    node_payload = best_first_graph_search(source, target, cost_function, isAstar = False)
+    node_payload = best_first_graph_search(source, target, cost_function)
     node_state = node_payload.state
     node_path = node_payload.path
     node_path_cost = node_payload.path_cost
@@ -28,7 +28,7 @@ def find_ucs_rout(source, target):
     return source, target, node_path, node_path_cost
 
 def find_astar_route(source, target):
-    node_payload = best_first_graph_search(source, target, Astar_cost_function, isAstar = True)
+    node_payload = best_first_graph_search(source, target, cost_function, huristic_function)
     node_state = node_payload.state
     node_path = node_payload.path
     node_path_cost = node_payload.path_cost

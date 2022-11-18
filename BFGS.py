@@ -1,10 +1,10 @@
-import pQueue
+from pQueue import pQueue
 from Node import Node
 
 
-def best_first_graph_search(start, end, f, isAstar):
-    frontier = pQueue.pQueue()
-    start_node = Node(start, [], 0, isAstar, end)
+def best_first_graph_search(start, end, f, h=False):
+    frontier = pQueue(end)
+    start_node = Node(start, [], 0)
     frontier.append_node(start_node)
     close_list = set()
     while frontier.isNotEmpty():
@@ -17,7 +17,10 @@ def best_first_graph_search(start, end, f, isAstar):
             if child.state not in close_list and not frontier.check_if_node_in_frontier(child):
                 frontier.append_node(child)
             else:
-                frontier.find_problematic_child(child)
+                if(h == False):
+                    frontier.find_problematic_child_ucs(child)
+                else:
+                    frontier.find_problematic_child_astar(child, h)
     return None
 
 
