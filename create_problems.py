@@ -13,9 +13,12 @@ class ProblemCreator:
     def print_roads(self):
         print(self.roads)
 
-    def convert_problem_list_to_csv(self):
-        df = pd.DataFrame.from_dict(self.problems_list)
-        df.to_csv('problems.csv', index = False, header=True)
+    def convert_problem_list_to_txt_file(self):
+        with open('problems.txt', 'w') as f:
+            for p in self.problems_list:
+                f.write(f"{p['start']}, {p['goal']}\n")
+        # df = pd.DataFrame.from_dict(self.problems_list)
+        # df.to_csv('problems.csv', index = False, header=True)
 
 
     def create_one_problem(self):
@@ -36,10 +39,11 @@ class ProblemCreator:
 
     def create_all_problems(self):
         for _ in range(0,100):
+            print(_)
             start, goal = self.create_one_problem()
             problem = { "start" : start, "goal" : goal}
             self.problems_list.append(problem)
-        self.convert_problem_list_to_csv()
+        self.convert_problem_list_to_txt_file()
 
         
 

@@ -3,12 +3,14 @@ from main import find_ucs_rout
 from main import find_astar_route
 
 
-def convert_problem_list_to_csv(df, location):
-    df.to_csv(f'{location}.csv', index = False, header=True)
+def convert_problem_list_to_txt(df, location):
+    with open(f'{location}.txt', 'w') as f:
+        for index, row in df.iterrows():
+            f.write(f"{row['source']}; {row['target']}; {row['path']}; {row['path cost']}\n")
 
 
-def create_df_from_csv():
-    df = pd.read_csv('problems.csv')
+def create_df_from_txt():
+    df = pd.read_csv('problems.txt', sep=",", names=['source', 'end'])
     return df
 
 def start_batch(df, func):
@@ -23,8 +25,8 @@ def start_batch(df, func):
     print(df)
     return df
 
-problem = create_df_from_csv()
+problem = create_df_from_txt()
 result_df_ucs = start_batch(problem, find_ucs_rout)
 result_df_astar = start_batch(problem, find_astar_route)
-convert_problem_list_to_csv(result_df_ucs, 'results\\UCSRuns')
-convert_problem_list_to_csv(result_df_astar, 'results\\AStarRuns')
+convert_problem_list_to_txt(result_df_ucs, 'results\\UCSRuns')
+convert_problem_list_to_txt(result_df_astar, 'results\\AStarRuns')

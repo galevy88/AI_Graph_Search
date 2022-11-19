@@ -10,14 +10,11 @@ We just parse input and call methods from other modules.
 from BFGS import best_first_graph_search
 from ways.tools import compute_distance
 
-def cost_function(x, y, speed):
-    return ((x+y) / 1000) / speed
+def cost_function(x, y):
+    return x+y
 
 def huristic_function(lat1, lon1, lat2, lon2):
     return compute_distance(lat1, lon1, lat2, lon2) / 110
-
-# def Astar_cost_function(x, y, lat1, lon1, lat2, lon2, speed, max_speed):
-#     return cost_function(x,y, speed) + huristic_function(lat1, lon1, lat2, lon2, max_speed)
 
 def find_ucs_rout(source, target):
     node_payload = best_first_graph_search(source, target, cost_function)
