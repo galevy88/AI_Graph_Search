@@ -8,28 +8,32 @@ We just parse input and call methods from other modules.
 #simply import your modules and call the appropriate functions
 
 from BFGS import best_first_graph_search
+from IDA import IDA
 from distance_functions import cost_function, huristic_function
 
-def find_ucs_rout(source, target):
-    node_payload = best_first_graph_search(source, target, cost_function)
+
+def fetch_results_from_node_payload(node_payload):
     node_state = node_payload.state
     node_path = node_payload.path
     node_path_cost = node_payload.path_cost
     node_path.append(node_state)
+    return node_path, node_path_cost
+
+def find_ucs_rout(source, target):
+    node_payload = best_first_graph_search(source, target, cost_function)
+    node_path, node_path_cost = fetch_results_from_node_payload(node_payload)
     return source, target, node_path, node_path_cost
 
 def find_astar_route(source, target):
     node_payload = best_first_graph_search(source, target, cost_function, huristic_function)
-    node_state = node_payload.state
-    node_path = node_payload.path
-    node_path_cost = node_payload.path_cost
-    node_path.append(node_state)
+    node_path, node_path_cost = fetch_results_from_node_payload(node_payload)
     return source, target, node_path, node_path_cost
 
 
 def find_idastar_route(source, target):
-    'call function to find path, and return list of indices'
-    raise NotImplementedError
+    node_payload = IDA(source, target)
+    node_path, node_path_cost = fetch_results_from_node_payload(node_payload)
+    return source, target, node_path, node_path_cost
     
 
 def dispatch(argv):
@@ -45,12 +49,14 @@ def dispatch(argv):
 
 
 if __name__ == '__main__':
-    from sys import argv
-    dispatch(argv)
+    # from sys import argv
+    # dispatch(argv)
     # print("Got you!")
-    # source = 610026
-    # target = 610037
-    # x = find_ucs_rout(source, target)
-    # y = find_astar_route(source, target)
-    # print(x)
-    # print(y)
+    source = 583601
+    target = 583619
+    ucs = find_ucs_rout(source, target)
+    astar = find_astar_route(source, target)
+    ida = find_idastar_route(source, target)
+    print(f"UCS : {ucs}")
+    print(f"A*  :{astar}")
+    print(f"IDA :{ida}")
