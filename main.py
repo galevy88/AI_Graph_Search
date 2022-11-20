@@ -8,13 +8,7 @@ We just parse input and call methods from other modules.
 #simply import your modules and call the appropriate functions
 
 from BFGS import best_first_graph_search
-from ways.tools import compute_distance
-
-def cost_function(x, y):
-    return x+y
-
-def huristic_function(lat1, lon1, lat2, lon2):
-    return compute_distance(lat1, lon1, lat2, lon2) / 110
+from distance_functions import cost_function, huristic_function
 
 def find_ucs_rout(source, target):
     node_payload = best_first_graph_search(source, target, cost_function)
@@ -51,12 +45,12 @@ def dispatch(argv):
 
 
 if __name__ == '__main__':
-    # from sys import argv
-    # dispatch(argv)
-    print("Got you!")
-    source = 17869
-    target = 17867
-    x = find_ucs_rout(source, target)
-    y = find_astar_route(source, target)
-    print(x)
-    print(y)
+    from sys import argv
+    dispatch(argv)
+    # print("Got you!")
+    # source = 610026
+    # target = 610037
+    # x = find_ucs_rout(source, target)
+    # y = find_astar_route(source, target)
+    # print(x)
+    # print(y)

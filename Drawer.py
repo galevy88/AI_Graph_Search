@@ -14,7 +14,7 @@ def draw_plot(ucs_costs, astar_costs):
     plt.ylabel("AStar costs")
     plt.show()
 
-def create_huristic_costs(df_aster):
+def create_huristic_costs():
     ls = []
     for index, row in df_astar.iterrows():
         source = row[0]
@@ -29,5 +29,5 @@ def create_huristic_costs(df_aster):
 
 df_astar = create_df_from_csv()
 astar_costs = df_astar.iloc[:,-1:]
-huristic_costs = create_huristic_costs(create_df_from_csv)
+huristic_costs = create_huristic_costs()
 draw_plot(huristic_costs, astar_costs)
