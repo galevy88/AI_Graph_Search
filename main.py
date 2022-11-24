@@ -43,7 +43,7 @@ def dispatch(argv):
     source, target = int(argv[2]), int(argv[3])
     if argv[1] == 'ucs':
         path = find_ucs_rout(source, target)
-    elif argv == 'astar':
+    elif argv[1] == 'astar':
         path = find_astar_route(source, target)
     elif argv[1] == 'idastar':
         path = find_idastar_route(source, target)
@@ -53,19 +53,3 @@ def dispatch(argv):
 if __name__ == '__main__':
     from sys import argv
     dispatch(argv)
-    # # print("Got you!")
-    # source = 635140
-    # target = 635218
-    # # ucs = find_ucs_rout(source, target)
-    # # astar = find_astar_route(source, target)
-    # ida = find_idastar_route(source, target)
-    # path = ida[2]
-    # path_cost = ida[3]
-    # print(path_cost)
-    # print("DONE")
-    # graph = load_map_from_csv()
-    # plot_path(graph, path)
-    # # print(f"UCS : {ucs}")
-    # # print(f"A*  :{astar}")
-    # # print(f"IDA :{ida}")
-    # print(path)
