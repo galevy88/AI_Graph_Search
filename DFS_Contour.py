@@ -1,3 +1,4 @@
+#Gal Levy 208540872
 from distance_functions import cost_function, huristic_function
 from Node_Functions import get_lat_lon
 import math
@@ -9,13 +10,14 @@ def f(node, end):
     return fCost
 
 def DFS_Countur(node, end, limit):
-    if node.path_cost > limit: return -1, f(node, end)
+    if f(node, end) > limit: return -1, f(node, end)
     if node.state == end: return node, limit
+    #print(f"node.state: {node.state} end: {end}")
     nextF = math.inf
     for child in node.expand(cost_function):
         solution, newf = DFS_Countur(child, end, limit)
         if solution != -1: return solution, limit
-        nextF = min(nextF, newf)
+    nextF = min(nextF, newf)
     
     return -1, nextF
 

@@ -1,3 +1,4 @@
+#Gal Levy 208540872
 'accessible using "import ways.draw"'
 
 
@@ -13,11 +14,15 @@ except ImportError:
 plt.axis('equal')
 
 
-def plot_path(roads, path, color='g'):
+def plot_path(roads, path, source, target, color='g'):
     '''path is a list of junction-ids - keys in the dictionary.
     e.g. [0, 33, 54, 60]
     Don't forget plt.show()'''
     flons, tolons, flats, tolats = [] ,[] ,[] ,[]
+    flons = []
+    tolons = []
+    flats = []
+    tolats = []
     for s, t in zip(path[:-1], path[1:]):
         ps, pt = roads[s], roads[t]
         flons.append(ps.lon)
@@ -25,6 +30,9 @@ def plot_path(roads, path, color='g'):
         flats.append(ps.lat)
         tolats.append(pt.lat)
     plt.plot(flons, flats, tolons, tolats, color)
+    plt.ticklabel_format(useOffset=False)
+    plt.title(f"Path from {source} to {target}")
+    plt.savefig(f'solutions_images\\img_{source}_to_{target}.png')
 
 
 def set_no_axis():

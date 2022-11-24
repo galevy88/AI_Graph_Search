@@ -1,4 +1,4 @@
-
+#Gal Levy 208540872
 from ways.graph import load_map_from_csv
 import pandas as pd
 import random
@@ -17,15 +17,13 @@ class ProblemCreator:
         with open('problems.txt', 'w') as f:
             for p in self.problems_list:
                 f.write(f"{p['start']}, {p['goal']}\n")
-        # df = pd.DataFrame.from_dict(self.problems_list)
-        # df.to_csv('problems.csv', index = False, header=True)
 
 
     def create_one_problem(self):
         list = []
         junction_index = random.randint(0, len(self.roads))
         list.append(junction_index)
-        path_length = random.randint(10,20)
+        path_length = random.randint(30,50)
         for _ in range(0, path_length):
             next_junction = self.roads.go_to_next_junction(junction_index)
             if next_junction != -1:
