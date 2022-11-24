@@ -1,3 +1,4 @@
+#Gal Levy 208540872
 '''
 This file should be runnable to print map_statistics using 
 $ python stats.py

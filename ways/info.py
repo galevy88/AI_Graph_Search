@@ -1,3 +1,4 @@
+#Gal Levy 208540872
 '''Constants - details about the map.
 accessible using "import ways.info'''
 

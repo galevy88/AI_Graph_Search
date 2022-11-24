@@ -1,3 +1,4 @@
+#Gal Levy 208540872
 import pandas as pd
 from main import find_ucs_rout
 from main import find_astar_route
@@ -6,7 +7,7 @@ from main import find_astar_route
 def convert_problem_list_to_txt(df, location):
     with open(f'{location}.txt', 'w') as f:
         for index, row in df.iterrows():
-            f.write(f"{row['source']}; {row['target']}; {row['path']}; {row['path cost']}\n")
+            f.write(f"{row['path']} - {row['path cost']}\n")
 
 
 def create_df_from_txt():

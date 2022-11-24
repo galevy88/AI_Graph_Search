@@ -1,11 +1,12 @@
+#Gal Levy 208540872
 '''
  A set of utilities for using israel.csv 
  The map is extracted from the openstreetmap project
 '''
 
 from collections import namedtuple
-import ways.tools as tools
-import ways.info as info
+from . import tools
+from . import info
 import sys
 import random
 

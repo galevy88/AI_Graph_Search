@@ -1,3 +1,4 @@
+#Gal Levy 208540872
 from ways.graph import Roads
 from ways.graph import load_map_from_csv
 from ways.info import get_max_speed
@@ -23,6 +24,6 @@ def generate_payload_for_node(state, father_state, path, father_path_cost, dista
     km_distance = distance / 1000
     current_path_cost = km_distance / get_max_speed(highway_type)
     # print(f"DISTANCE {distance} KM_DISTANCE: {km_distance}")
+    
     new_node_path_cost_time = f(father_path_cost, current_path_cost)
     return new_node_state, new_node_path, new_node_path_cost_time
-

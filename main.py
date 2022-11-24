@@ -1,3 +1,4 @@
+#Gal Levy 208540872
 '''
 Parse input and run appropriate code.
 Don't use this file for the actual work; only minimal code should be here.
@@ -10,7 +11,8 @@ We just parse input and call methods from other modules.
 from BFGS import best_first_graph_search
 from IDA import IDA
 from distance_functions import cost_function, huristic_function
-
+from ways.graph import load_map_from_csv
+from ways.draw import plot_path
 
 def fetch_results_from_node_payload(node_payload):
     node_state = node_payload.state
@@ -41,22 +43,29 @@ def dispatch(argv):
     source, target = int(argv[2]), int(argv[3])
     if argv[1] == 'ucs':
         path = find_ucs_rout(source, target)
-    elif argv[1] == 'astar':
+    elif argv == 'astar':
         path = find_astar_route(source, target)
     elif argv[1] == 'idastar':
         path = find_idastar_route(source, target)
-    print(' '.join(str(j) for j in path))
+    print(' '.join(str(j) for j in path[2]))
 
 
 if __name__ == '__main__':
-    # from sys import argv
-    # dispatch(argv)
-    # print("Got you!")
-    source = 583601
-    target = 583619
-    ucs = find_ucs_rout(source, target)
-    astar = find_astar_route(source, target)
-    ida = find_idastar_route(source, target)
-    print(f"UCS : {ucs}")
-    print(f"A*  :{astar}")
-    print(f"IDA :{ida}")
+    from sys import argv
+    dispatch(argv)
+    # # print("Got you!")
+    # source = 635140
+    # target = 635218
+    # # ucs = find_ucs_rout(source, target)
+    # # astar = find_astar_route(source, target)
+    # ida = find_idastar_route(source, target)
+    # path = ida[2]
+    # path_cost = ida[3]
+    # print(path_cost)
+    # print("DONE")
+    # graph = load_map_from_csv()
+    # plot_path(graph, path)
+    # # print(f"UCS : {ucs}")
+    # # print(f"A*  :{astar}")
+    # # print(f"IDA :{ida}")
+    # print(path)
